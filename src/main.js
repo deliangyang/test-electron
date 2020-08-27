@@ -1,44 +1,37 @@
-const { app, Menu, BrowserWindow, ipcMain } = require('electron')
-
-const dockMenu = Menu.buildFromTemplate([
-  {
-    label: 'New Window',
-    click () { console.log('New Window') }
-  }, {
-    label: 'New Window with Settings',
-    submenu: [
-      { label: 'Basic' },
-      { label: 'Pro' }
-    ]
-  },
-  { label: 'New Command...' }
-])
-
-function createWindow () {   
-  // 创建浏览器窗口
-  const win = new BrowserWindow({
-    width: 800,
-    height: 600,
-    webPreferences: {
-      nodeIntegration: true
-    }
-  })
-
-  // 并且为你的应用加载index.html
-  win.loadFile('index.html')
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var _a = require('electron'), app = _a.app, Menu = _a.Menu, BrowserWindow = _a.BrowserWindow, ipcMain = _a.ipcMain;
+var dockMenu = Menu.buildFromTemplate([
+    {
+        label: 'New Window',
+        click: function () { console.log('New Window'); }
+    }, {
+        label: 'New Window with Settings',
+        submenu: [
+            { label: 'Basic' },
+            { label: 'Pro' }
+        ]
+    },
+    { label: 'New Command...' }
+]);
+function createWindow() {
+    var win = new BrowserWindow({
+        width: 800,
+        height: 600,
+        webPreferences: {
+            nodeIntegration: true
+        }
+    });
+    win.loadFile('index.html');
 }
-
-ipcMain.on('asynchronous-message', (event, arg) => {
-  console.log(arg) // prints "ping"
-  event.reply('asynchronous-reply', 'pong')
-})
-
-ipcMain.on('synchronous-message', (event, arg) => {
-  console.log(arg) // prints "ping"
-  event.returnValue = 'pong'
-})
-
-app.dock.setMenu(dockMenu)
-
-app.whenReady().then(createWindow)
-
+ipcMain.on('asynchronous-message', function (event, arg) {
+    console.log(arg);
+    event.reply('asynchronous-reply', 'pong');
+});
+ipcMain.on('synchronous-message', function (event, arg) {
+    console.log(arg);
+    event.returnValue = 'pong';
+});
+app.dock.setMenu(dockMenu);
+app.whenReady().then(createWindow);
+//# sourceMappingURL=main.js.map

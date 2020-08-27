@@ -3,5 +3,5 @@
 /node_modules/
 package-lock.json
 yarn.lock
-/src/**/*.js.map
 /src/**/*.js
+/src/**/*.js.map
